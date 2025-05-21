@@ -46,6 +46,12 @@ async def test_1p7k_online_send_charge_stop():
 
 @pytest.mark.xfail
 @pytest.mark.asyncio
+async def test_1p7k_online_send_charge_schedule_override():
+   async with Device(IP_OF_1P7K_DEVICE) as device:
+      process_for_pytest(await device.send_charge_schedule_override())
+
+@pytest.mark.xfail
+@pytest.mark.asyncio
 async def test_1p7k_online_send_reset():
    async with Device(IP_OF_1P7K_DEVICE) as device:
       process_for_pytest(await device.send_reset())

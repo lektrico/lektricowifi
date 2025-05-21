@@ -1,6 +1,41 @@
 [build-system]
 requires = [
-    "setuptools>=42",
+    "setuptools>=61",
     "wheel"
 ]
 build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "lektricowifi"
+version = "0.1"
+description = "Communication with Lektrico's chargers"
+readme = "README.md"
+requires-python = ">=3.6"
+license = {text = "MIT"}
+authors = [
+  { name = "Lektrico", email = "mihaela@civitronic.ro" }
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+dependencies = [
+  "async_timeout >= 4.0.2",
+  "httpx >= 0.27.0",
+  "pydantic >= 1.10.17"
+]
+
+[project.urls]
+"Homepage" = "https://lektri.co"
+"Bug Tracker" = "https://lektri.co"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"lektricowifi" = ["py.typed"]

@@ -181,7 +181,16 @@ class Device:
             {"src": "HASS", 
             "id": random.randint(10000000, 99999999), 
             "method": "charge.stop"})
-        
+    
+    async def send_charge_schedule_override(self) -> dict:
+        """Command the charger to override the charge schedule.
+        Return the device's confirmation.
+        """
+        return await self._request_post(
+            {"src": "HASS", 
+            "id": random.randint(10000000, 99999999), 
+            "method": "Charging_schedule.Override"})
+            
     async def send_reset(self) -> dict:
         """Command the device to reset.
         Return the device's confirmation.

@@ -42,6 +42,9 @@ def mock_1p7k() -> AsyncMock:
     mock_1p7k.Device.send_charge_stop = AsyncMock(
         return_value= {'id': 57130362, 'src': '1p7k_500000', 'dst': 'MOCK', 'result': True}
     )
+    mock_1p7k.Device.send_charge_schedule_override = AsyncMock(
+        return_value= {'id': 57130362, 'src': '1p7k_500000', 'dst': 'MOCK', 'result': True}
+    )
     mock_1p7k.Device.send_reset = AsyncMock(
         return_value= {'id': 57130362, 'src': '1p7k_500000', 'dst': 'MOCK', 'result': True}
     )
@@ -132,6 +135,16 @@ async def test_1p7k_mock_send_charge_stop(mock_1p7k) -> None:
     :return: None
     """
     result = await mock_1p7k.Device.send_charge_stop()
+    process_for_pytest(result)
+
+@pytest.mark.asyncio
+async def test_1p7k_mock_send_charge_schedule_override(mock_1p7k) -> None:
+    """
+    Test for send_charge_schedule_override method using Async Mocking
+    :param mock_1p7k: Mock fixture
+    :return: None
+    """
+    result = await mock_1p7k.Device.send_charge_schedule_override()
     process_for_pytest(result)
 
 @pytest.mark.asyncio

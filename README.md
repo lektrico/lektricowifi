@@ -24,6 +24,7 @@ commands for charger:
 
 - start charging: send_charge_start
 - stop charging: send_charge_stop
+- override charge schedule: send_charge_schedule_override
 - reset the device: send_reset
 - enable/disable authorisation: set_auth with bool parameter
 - set leds brightness: set_led_max_brightness with int parameter 10->100
@@ -40,7 +41,7 @@ commands for em:
 1. Find the IP of your Lektrico device in your local wifi network
 2. Install it in your python project's environment
    
-   pip install lektricowifi==0.0.25
+   pip install lektricowifi==0.1
    
 3. Install the required library
 
