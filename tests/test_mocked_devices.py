@@ -15,9 +15,18 @@ def mock_1p7k() -> AsyncMock:
     Async Mock Fixture for 1P7K
     :return:
     """
-    _device_answer_at_info = {"currents": [0.015, 0.006, 0.011],
+    _device_answer_at_info = {
+                     "current_l1": 0.015,
+                     "current_l2": 0.006,
+                     "current_l3": 0.011,
+                     "voltage_l1": 238.53,
+                     "voltage_l2": 238.521,
+                     "voltage_l3": 236.852,
+                     "charger_state": "Available",
+                     "relay_mode": 1,
+                     "currents": [0.015, 0.006, 0.011],
                      "voltages": [238.53, 238.521, 236.852],
-                     "fw_version": "1.45_beta", "extended_charger_state": "Available", 
+                     "fw_version": "1.45_beta",
                      "session_energy": 0.0, "charging_time": 0, 
                      "instant_power": 0.0, "temperature": 39.8, 
                      "dynamic_current": 32, "require_auth": False, 
@@ -31,10 +40,10 @@ def mock_1p7k() -> AsyncMock:
                      "user_current": 32, "current_limit_reason": "Installation current"}
     mock_1p7k = AsyncMock()
     mock_1p7k.Device.device_info = AsyncMock(
-        return_value= InfoForCharger.from_dict(_device_answer_at_info)
+        return_value= InfoForCharger.parse_obj(_device_answer_at_info)
     )
     mock_1p7k.Device.device_config = AsyncMock(
-        return_value= Settings.from_dict({"type": "1p7k", "serial_number": 500000, "board_revision": "E"})
+        return_value= Settings.parse_obj({"type": "1p7k", "serial_number": 500000, "board_revision": "E"})
     )
     mock_1p7k.Device.send_charge_start = AsyncMock(
         return_value= {'id': 57130362, 'src': '1p7k_500000', 'dst': 'MOCK', 'result': True}
@@ -73,18 +82,30 @@ def mock_em() -> AsyncMock:
     Async Mock Fixture for EM
     :return:
     """
-    _device_answer_at_info = {"current": [0.015, 0.006, 0.011],
-                     "voltage": [238.53, 238.521, 236.852],
-                     "active_p": [0.0, 0.0, 0.0],
-                     "fw_version": "1.15", "breaker_rating": 32, 
-                     "power_factor": [0.0, 0.0, 0.0], "load_balancing_mode": 0}
+    _device_answer_at_info = {
+        "current_l1": 0.015,
+        "current_l2": 0.006,
+        "current_l3": 0.011,
+        "voltage_l1": 238.53,
+        "voltage_l2": 238.521,
+        "voltage_l3": 236.852,
+        "fw_version": "1.15",
+        "power_l1": 0.0,
+        "power_l2": 0.0,
+        "power_l3": 0.0,
+        "breaker_curent": 32,
+        "power_factor_l1": 0.0,
+        "power_factor_l2": 0.0,
+        "power_factor_l3": 0.0,
+        "lb_mode": 0
+    }
     
     mock_em = AsyncMock()
     mock_em.Device.device_info = AsyncMock(
-        return_value= InfoForM2W.from_dict(_device_answer_at_info)
+        return_value= InfoForM2W.parse_obj(_device_answer_at_info)
     )
     mock_em.Device.device_config = AsyncMock(
-        return_value= Settings.from_dict({"type": "em", "serial_number": 800000, "board_revision": "A"})
+        return_value= Settings.parse_obj({"type": "em", "serial_number": 800000, "board_revision": "A"})
     )
     mock_em.Device.send_reset = AsyncMock(
         return_value= {'id': 57130362, 'src': 'm2w_800000', 'dst': 'MOCK', 'result': True}
