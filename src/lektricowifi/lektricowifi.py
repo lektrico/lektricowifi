@@ -106,6 +106,9 @@ class Device:
             if "relay_mode" not in data.keys():
                 data["relay_mode"] = -1
 
+            if "precise_pwm_mode" not in data.keys():
+                data["precise_pwm_mode"] = False
+
             return InfoForCharger(**data,
                                   current_l1=list(data["currents"])[0],
                                   current_l2=list(data["currents"])[1],
@@ -259,6 +262,16 @@ class Device:
             "id": random.randint(10000000, 99999999), 
             "method": "app_config.set", 
             "params":{"config_key": "charger_locked", "config_value": value}})    
+    
+    async def set_compatibility_mode(self, value: bool) -> dict:
+        """Set the compatibility mode. Only for 1p7k chargers.
+        Return the device's confirmation.
+        """
+        return await self._request_post(
+            {"src": "HASS", 
+            "id": random.randint(10000000, 99999999), 
+            "method": "app_config.set", 
+            "params":{"config_key": "precise_pwm_mode", "config_value": value}})
     
     async def set_relay_mode(self, value_dynamic_current: int, value: int) -> bool:
         """Set relay_mode.
