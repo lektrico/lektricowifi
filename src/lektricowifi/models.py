@@ -35,6 +35,7 @@ class InfoForCharger(Info):
     overcurrent: bool
     overtemp: bool
     overvoltage_error: bool
+    precise_pwm_mode: bool
     relay_mode: int
     require_auth: bool
     rcd_error: bool
@@ -65,4 +66,3 @@ class Settings(BaseModel):
     type: str
     serial_number: int
     board_revision: str
-    

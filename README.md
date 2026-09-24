@@ -31,6 +31,7 @@ commands for charger:
 - set the dynamic current: set_dynamic_current with int parameter 0 or 6->32
 - set the user current: set_user_current with int parameter 6->32
 - lock/unlock the device: set_charger_locked with bool parameter
+- enable/disable the compatibility mode (1P7K only): set_compatibility_mode with bool parameter
 
 commands for em:
 
