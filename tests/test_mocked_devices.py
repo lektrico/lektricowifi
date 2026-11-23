@@ -37,6 +37,7 @@ def mock_1p7k() -> AsyncMock:
                      "meter_fault": False, "undervoltage_error": False, 
                      "overvoltage_error": False, "rcd_error": False, 
                      "cp_diode_failure": False, "contactor_failure": False, "headless": False,
+                     "precise_pwm_mode": False,
                      "user_current": 32, "current_limit_reason": "Installation current"}
     mock_1p7k = AsyncMock()
     mock_1p7k.Device.device_info = AsyncMock(
